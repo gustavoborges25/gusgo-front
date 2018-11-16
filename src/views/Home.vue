@@ -1,13 +1,14 @@
-<template lang='pug'>
-  hello-world
+<template lang="pug">
+  #home
+    span Dashboard
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+  import Sidebar from '@/views/Sidebar'
 
   export default {
     components: {
-      HelloWorld
+      Sidebar
     }
   }
 </script>
