@@ -1,6 +1,6 @@
 <template lang="pug">
   #home
-    span Dashboard
+    img(src='../static/dashboard.png')
 </template>
 
 <script>
