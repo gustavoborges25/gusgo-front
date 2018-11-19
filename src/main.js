@@ -6,6 +6,17 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+var theme = require('../.theme.json')
+theme.install = function () {
+  Object.defineProperty(Vue.prototype, '$theme', {
+    get () {
+      return theme
+    }
+  })
+}
+
+Vue.use(theme)
+
 new Vue({
   router,
   store,
