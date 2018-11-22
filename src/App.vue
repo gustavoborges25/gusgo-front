@@ -1,5 +1,9 @@
 <template lang='pug'>
-  v-app
+  v-app(
+    standalone
+    :dark="$theme.dark"
+    :light="!$theme.dark"
+  )
     v-fade-transition(mode='out-in')
       router-view
 </template>

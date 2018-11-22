@@ -32,7 +32,7 @@
               right
               bottom
               absolute
-              color="secondary"
+              secondary
               type="submit"
             )
               v-icon chevron_right

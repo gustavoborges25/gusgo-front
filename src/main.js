@@ -3,6 +3,9 @@ import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueResource from 'vue-resource'
+import Env from '../.env.js'
+import {AuthorizationInterceptor} from './interceptors'
 
 Vue.config.productionTip = false
 
@@ -15,10 +18,16 @@ theme.install = function () {
   })
 }
 
+Vue.use(VueResource)
 Vue.use(theme)
+Vue.use(Env)
+
+Vue.http.interceptors.push(AuthorizationInterceptor(router))
+Vue.http.options.root = Vue.env.BASE_API_URL
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  components: { App }
 }).$mount('#app')
