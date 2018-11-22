@@ -1,0 +1,13 @@
+{
+  "title": "Gusgo",
+  "dark": false,
+  "sidebar": {
+    "visible": false,
+    "clipped": false,
+    "miniVariant": false,
+    "persistent": false
+  },
+  "footer": {
+    "fixed": true
+  }
+}

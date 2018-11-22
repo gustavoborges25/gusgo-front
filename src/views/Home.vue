@@ -1,13 +1,9 @@
-<template lang='pug'>
-  hello-world
+<template lang="pug">
+  img(src='../static/dashboard.png')
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
 
   export default {
-    components: {
-      HelloWorld
-    }
   }
 </script>

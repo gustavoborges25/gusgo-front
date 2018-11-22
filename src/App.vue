@@ -1,20 +1,19 @@
 <template lang='pug'>
-  v-app
-    router-view
+  v-app(
+    standalone
+    :dark="$theme.dark"
+    :light="!$theme.dark"
+  )
+    v-fade-transition(mode='out-in')
+      router-view
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  },
-  data () {
-    return {
-      //
-    }
+  export default {
+    name: 'app'
   }
-}
 </script>
+
+<style lang="stylus">
+  @import 'stylus/app'
+</style>
