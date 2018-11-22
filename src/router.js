@@ -1,18 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/Home'
 import Login from '@/views/Login'
 import Layout from '@/containers/Layout'
+import Home from '@/views/Home'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'hash',
+  linkActiveClass: 'open active',
+  scrollBehavior: () => ({y: 0}),
   routes: [
     {
       path: '/',
       redirect: 'home',
       component: Layout,
-      beforeEnter: function (to, from, next) {
+      beforeEnter: (to, from, next) => {
         const serialized = localStorage.getItem('authorization')
 
         if (!serialized) {
@@ -21,7 +24,15 @@ export default new Router({
         } else {
           next()
         }
-      }
+      },
+      children: [
+        {
+          path: '/home',
+          component: Home,
+          props: { route: 'home' },
+
+        }
+      ]
     },
     {
       path: '/login',

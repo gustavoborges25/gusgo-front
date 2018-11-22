@@ -1,3 +1,19 @@
+@require '../../node_modules/vuetify/src/stylus/settings/_colors'
+
+$primary = #153e7b
+$accent = $light-blue.accent-2
+$secondary = #f7bf03
+
+$theme := {
+  primary: $primary
+  accent: $accent
+  secondary: $secondary
+  info: $blue.lighten-1
+  warning: $amber.darken-2
+  error: $red.darken-4
+  success: $green.base
+}
+
 @import '../../node_modules/vuetify/src/stylus/main'
 
 .login
@@ -32,4 +48,4 @@
 
     img
       display inline-block
-      height 50px
+      height 120px
