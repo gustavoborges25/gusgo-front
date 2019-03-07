@@ -8,48 +8,43 @@
         v-divider
         form#form-login(@submit.prevent="login()")
           v-card-text
-            v-text-field(
-              required
-              label="E-mail"
+            text-field-email(
+              :required="true"
               v-model="user.email"
             )
-            v-text-field(
-              required
-              label="Senha"
-              ref="password"
-              type="password"
+            text-field-password(
+              :required="true"
               v-model="user.password"
             )
-          v-layout
+          v-layout(justify-space-between)
             v-btn.ma-0.pa-0.ml-3.mb-3(
               flat
               small
               to="/forgot-password"
             ) Esqueceu sua senha?
-            v-btn(
-              fab
-              dark
-              right
-              bottom
-              absolute
-              secondary
-              type="submit"
-            )
-              v-icon chevron_right
+            btn-confirm.mb-3(@click-event="login()")
 </template>
 
 <script>
   import messageNotification from '@/mixins/messageNotification'
+  import BtnConfirm from '../components/ButtonConfirm.vue'
+  import TextFieldEmail from '../components/TextFieldEmail.vue'
+  import TextFieldPassword from "../components/TextFieldPassword";
 
   export default {
+    components: {
+      TextFieldPassword,
+      TextFieldEmail,
+      BtnConfirm
+    },
     mixins: [
       messageNotification
     ],
     data () {
-      return {
+      return{
         user: {
           email: '',
-          password: ''
+          password: '',
         }
       }
     },
