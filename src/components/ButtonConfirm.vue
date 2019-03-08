@@ -1,12 +1,12 @@
 <template lang="pug">
   v-tooltip(bottom)
     v-btn(
-      slot="activator"
       fab
       dark
       right
       bottom
       absolute
+      slot="activator"
       color="primary"
       @click="change()"
     )
@@ -30,7 +30,3 @@
     }
   }
 </script>
-
-<style>
-
-</style>

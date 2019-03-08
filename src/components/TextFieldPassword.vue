@@ -1,11 +1,12 @@
 <template lang="pug">
   v-text-field(
+    :label="label"
+    :readonly="readonly"
+    :required="required"
+    :rules="[rules.required, rules.min]"
     :append-icon="show ? 'visibility' : 'visibility_off'"
     :type="show ? 'text' : 'password'"
-    :required="required"
-    :rules="[rules.required, rules.valid]"
-    :label="label"
-    v-model="email"
+    v-model="password"
     @click:append="show = !show"
   )
 </template>
@@ -18,6 +19,14 @@
         type: String,
         default: '',
       },
+      label: {
+        type: String,
+        default: 'Senha',
+      },
+      readonly: {
+        type: Boolean,
+        default: false,
+      },
       required: {
         type: Boolean,
         default: false,
@@ -25,10 +34,6 @@
       min: {
         type: Boolean,
         default: false,
-      },
-      label: {
-        type: String,
-        default: 'Senha',
       },
     },
     data(vm) {
@@ -51,7 +56,7 @@
       }
     },
     computed: {
-      email: {
+      password: {
         get() {
           return this.value;
         },
@@ -62,7 +67,3 @@
     },
   }
 </script>
-
-<style>
-
-</style>

@@ -1,16 +1,20 @@
 <template lang="pug">
   v-text-field(
+    mask="###.###.###-##"
     :label="label"
     :readonly="readonly"
     :required="required"
     :rules="[rules.required, rules.valid]"
-    v-model="email"
+    v-model="cpf"
   )
 </template>
 
 <script>
+  import Cpf from '@/mixins/aux-cpf';
+
   export default {
-    name: 'text-field-email',
+    name: 'text-field-cpf',
+    mixins: [Cpf],
     props: {
       value: {
         type: String,
@@ -18,7 +22,7 @@
       },
       label: {
         type: String,
-        default: 'E-mail',
+        default: 'Cpf',
       },
       readonly: {
         type: Boolean,
@@ -34,14 +38,13 @@
         rules: {
           required: value => {
             if (!value && vm.required) {
-              return 'E-mail obrigatório!'
+              return 'Cpf obrigatório!'
             }
             return true
           },
           valid: value => {
-            const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-            if (value && !regex.test(value)) {
-              return 'E-mail inválido!'
+            if (value && !this.isValidCPF(value)) {
+              return 'Cpf inválido!'
             }
             return true
           }
@@ -49,7 +52,7 @@
       }
     },
     computed: {
-      email: {
+      cpf: {
         get() {
           return this.value;
         },
