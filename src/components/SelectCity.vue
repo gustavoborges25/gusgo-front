@@ -14,11 +14,8 @@
 </template>
 
 <script>
-  import Cnpj from '@/mixins/aux-cnpj';
-
   export default {
     name: 'select-city',
-    mixins: [Cnpj],
     props: {
       value: {
         type: Object,

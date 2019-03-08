@@ -15,11 +15,8 @@
 </template>
 
 <script>
-  import Cnpj from '@/mixins/aux-cnpj';
-
   export default {
     name: 'select-state',
-    mixins: [Cnpj],
     props: {
       value: {
         type: Object,

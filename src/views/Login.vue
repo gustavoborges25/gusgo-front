@@ -8,17 +8,14 @@
         v-divider
         form#form-login(@submit.prevent="login()")
           v-card-text
-            <!--text-field-email(-->
-              <!--:required="true"-->
-              <!--v-model="user.email"-->
-            <!--)-->
-            <!--text-field-password(-->
-              <!--:required="true"-->
-              <!--v-model="user.password"-->
-            <!--)-->
-            span {{ user.email }}
-            select-state(v-model="user.email")
-            select-city(:state="user.email.id")
+            text-field-email(
+              :required="true"
+              v-model="user.email"
+            )
+            text-field-password(
+              :required="true"
+              v-model="user.password"
+            )
           v-layout(justify-space-between)
             v-btn.ma-0.pa-0.ml-3.mb-3(
               flat
@@ -33,13 +30,9 @@
   import BtnConfirm from '../components/ButtonConfirm.vue'
   import TextFieldEmail from '../components/TextFieldEmail.vue'
   import TextFieldPassword from "../components/TextFieldPassword";
-  import SelectState from "../components/SelectState";
-  import SelectCity from "../components/SelectCity";
 
   export default {
     components: {
-      SelectCity,
-      SelectState,
       TextFieldPassword,
       TextFieldEmail,
       BtnConfirm
@@ -50,8 +43,8 @@
     data () {
       return{
         user: {
-          email: { id: 12, sigla: 'AC', nome: 'Acre', regiao: { id: 1, sigla: 'N', nome: 'Norte' } },
-          password: {},
+          email: '',
+          password: '',
         }
       }
     },
