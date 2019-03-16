@@ -4,6 +4,9 @@ import Login from '@/views/Login'
 import Layout from '@/containers/Layout'
 import Home from '@/views/Home'
 
+import Customers from '@/views/Customers/Customers'
+import Orders from '@/views/Orders/Orders'
+
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +33,18 @@ export default new Router({
           path: '/home',
           component: Home,
           props: { route: 'home' },
+
+        },
+        {
+          path: '/orders',
+          component: Orders,
+          props: { route: 'orders' },
+
+        },
+        {
+          path: '/customers',
+          component: Customers,
+          props: { route: 'customers' },
 
         }
       ]
