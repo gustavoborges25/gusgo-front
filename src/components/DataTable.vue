@@ -16,7 +16,7 @@
             name="table-rows"
             :item="props.item"
           )
-    v-layout(
+    v-layout.pt-3(
       row
       align-center
     )
@@ -24,7 +24,7 @@
       v-flex.text-xs-center(xs10)
         v-pagination(
           v-model="page"
-          :length="lenghtPage"
+          :length="pages"
           circle
           color="primary"
           :total-visible="7"
@@ -56,7 +56,23 @@
     data () {
       return {
         page: 1,
-        lenghtPage: 1
+        rowsPerPage: 10,
+        totalItems: 515
+      }
+    },
+    computed:{
+      pages() {
+        const pages = parseInt((this.totalItems), 10) / parseInt((this.rowsPerPage), 10);
+        return Math.ceil(pages);
+      },
+      currentPage() {
+        const { pagination } = this;
+        return (pagination.atual - 1) * pagination.quantidade;
+      },
+    },
+    watch: {
+      rowsPerPage() {
+        this.$emit('update-list')
       }
     },
   }

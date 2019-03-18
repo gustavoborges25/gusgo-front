@@ -1,9 +1,18 @@
 <template lang="pug">
-  v-select(
-    label="Itens por página"
-    :items="items"
-    v-model="rowsPerPage"
-  )
+  v-menu(offset-y right)
+    v-btn.elevation-0(
+      slot="activator"
+      color="primary"
+      dark
+    ) {{ rowsPerPage }}
+      v-icon(right) keyboard_arrow_down
+    v-list
+      v-list-tile(@click="setLimit(10)")
+        v-list-tile-title 10
+      v-list-tile(@click="setLimit(30)")
+        v-list-tile-title 30
+      v-list-tile(@click="setLimit(50)")
+        v-list-tile-title 50
 </template>
 
 <script>
@@ -28,6 +37,11 @@
         set(newValue) {
           this.$emit('input', newValue)
         },
+      },
+    },
+    methods: {
+      setLimit(limite) {
+        this.rowsPerPage = limite;
       },
     },
   }
