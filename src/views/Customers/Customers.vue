@@ -1,24 +1,50 @@
 <template lang="pug">
   page(title="Clientes")
-    btn-add.right(text="Novo cliente")
-    data-table(:headers="headers")
-      td {{ items.code }}
-      td {{ items.name }}
-      td {{ items.document }}
-      td {{ items.phone }}
-      td {{ items.location }}
-      td
-        v-btn
-          v-icon delete
+    data-table(:headers="headers" :items="items")
+      template(slot="table-rows" slot-scope="props")
+        td {{ props.item.code }}
+        td {{ props.item.name }}
+        td {{ props.item.document }}
+        td {{ props.item.phone }}
+        td {{ props.item.location }}
+        td
+          v-tooltip(top)
+            v-btn(
+            fab
+            flat
+            dark
+            small
+            color="primary"
+            @click.stop.prevent="edit(props.item)"
+            slot="activator"
+            )
+              v-icon edit
+            span Editar
+          v-tooltip(top)
+            v-btn(
+            fab
+            flat
+            dark
+            small
+            color="red"
+            @click.stop.prevent="delete(props.item)"
+            slot="activator"
+            )
+              v-icon delete
+            span Excluir
+
 </template>
 
 <script>
 
   import Page from "../../components/Page";
   import DataTable from "../../components/DataTable";
-  import BtnAdd from "../../components/ButtonAdd";
+
   export default {
-    components: {BtnAdd, DataTable, Page},
+    components: {
+      DataTable,
+      Page
+    },
     data () {
       return {
         headers: [

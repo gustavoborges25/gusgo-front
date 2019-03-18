@@ -1,5 +1,6 @@
 <template lang="pug">
   #datatable
+    btn-add.right(text="Novo cliente")
     v-data-table.pt-4(
       hide-actions
       :headers="headers"
@@ -9,7 +10,12 @@
       no-data-text="Nenhum registro"
       no-results-text="Nenhum registro encontrado"
     )
-      slot
+      template(slot="items" slot-scope="props")
+        tr
+          slot(
+            name="table-rows"
+            :item="props.item"
+          )
     v-layout(
       row
       align-center
@@ -29,9 +35,14 @@
 
 <script>
   import SelectPage from "./SelectPage";
+  import BtnAdd from "./ButtonAdd";
+
   export default {
     name: 'data-table',
-    components: {SelectPage},
+    components: {
+      SelectPage,
+      BtnAdd
+    },
     props: {
       headers: {
         type: Array,
