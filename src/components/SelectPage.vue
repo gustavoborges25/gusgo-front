@@ -1,18 +1,20 @@
 <template lang="pug">
-  v-menu(offset-y right)
-    v-btn.elevation-0(
-      slot="activator"
-      color="primary"
-      dark
-    ) {{ rowsPerPage }}
-      v-icon(right) keyboard_arrow_down
-    v-list
-      v-list-tile(@click="setLimit(10)")
-        v-list-tile-title 10
-      v-list-tile(@click="setLimit(30)")
-        v-list-tile-title 30
-      v-list-tile(@click="setLimit(50)")
-        v-list-tile-title 50
+  v-tooltip
+    v-menu(offset-y right)
+      v-btn.elevation-0(
+        slot="activator"
+        color="primary"
+        dark
+      ) {{ rowsPerPage }}
+        v-icon(right) keyboard_arrow_down
+      v-list
+        v-list-tile(@click="setLimit(10)")
+          v-list-tile-title 10
+        v-list-tile(@click="setLimit(30)")
+          v-list-tile-title 30
+        v-list-tile(@click="setLimit(50)")
+          v-list-tile-title 50
+    span Itens por página
 </template>
 
 <script>

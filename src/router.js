@@ -31,20 +31,24 @@ export default new Router({
       children: [
         {
           path: '/home',
+          name: 'home',
           component: Home,
           props: { route: 'home' },
 
         },
         {
           path: '/orders',
+          name: 'orders',
           component: Orders,
           props: { route: 'orders' },
 
         },
         {
           path: '/customers',
+          name: 'customers',
           component: Customers,
           props: { route: 'customers' },
+
 
         }
       ]

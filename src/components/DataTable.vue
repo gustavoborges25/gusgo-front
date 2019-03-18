@@ -3,12 +3,11 @@
     btn-add.right(text="Novo cliente")
     v-data-table.pt-4(
       hide-actions
+      class="elevation-1"
+      :no-data-text="noDataText"
+      :no-results-text="noDataResults"
       :headers="headers"
       :items="items"
-      class="elevation-1"
-      pagination.sync="pagination"
-      no-data-text="Nenhum registro"
-      no-results-text="Nenhum registro encontrado"
     )
       template(slot="items" slot-scope="props")
         tr
@@ -51,13 +50,25 @@
       items: {
         type: Array,
         default: []
+      },
+      pagination: {
+        type: Object,
+        default: {}
+      },
+      noDataText: {
+        type: String,
+        default: 'Nenhum registro'
+      },
+      noDataResults: {
+        type: String,
+        default: 'Nenhum registro encontrado'
       }
     },
     data () {
       return {
         page: 1,
         rowsPerPage: 10,
-        totalItems: 515
+        totalItems: 0
       }
     },
     computed:{
@@ -65,14 +76,23 @@
         const pages = parseInt((this.totalItems), 10) / parseInt((this.rowsPerPage), 10);
         return Math.ceil(pages);
       },
-      currentPage() {
-        const { pagination } = this;
-        return (pagination.atual - 1) * pagination.quantidade;
+      page: {
+        get() {
+          return this.pagination.actual || 1
+        },
+        set(newValue) {
+          this.pagination.actual = newValue
+          this.$emit('update-list')
+        }
       },
-    },
-    watch: {
-      rowsPerPage() {
-        this.$emit('update-list')
+      rowsPerPage: {
+        get() {
+          return this.pagination.limit || 1
+        },
+        set(newValue) {
+          this.pagination.limit = newValue
+          this.$emit('update-list')
+        }
       }
     },
   }

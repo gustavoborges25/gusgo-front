@@ -6,6 +6,7 @@ import store from './store'
 import VueResource from 'vue-resource'
 import Env from '../.env.js'
 import {AuthorizationInterceptor} from './interceptors'
+import miniToastr from 'mini-toastr';
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,8 @@ theme.install = function () {
     }
   })
 }
+
+Vue.use(miniToastr.init());
 
 Vue.use(VueResource)
 Vue.use(theme)

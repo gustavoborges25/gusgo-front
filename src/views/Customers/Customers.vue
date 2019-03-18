@@ -1,7 +1,16 @@
 <template lang="pug">
   page(title="Clientes")
-    data-table(:headers="headers" :items="items")
-      template(slot="table-rows" slot-scope="props")
+    data-table(
+      :headers="headers"
+      :items="customers"
+      noDataText="Nenhum cliente cadastrado"
+      :pagination="pagination"
+      @update-list="getCustomers()"
+    )
+      template(
+        slot="table-rows"
+        slot-scope="props"
+      )
         td {{ props.item.code }}
         td {{ props.item.name }}
         td {{ props.item.document }}
@@ -10,25 +19,25 @@
         td
           v-tooltip(top)
             v-btn(
-            fab
-            flat
-            dark
-            small
-            color="primary"
-            @click.stop.prevent="edit(props.item)"
-            slot="activator"
+              fab
+              flat
+              dark
+              small
+              color="primary"
+              @click.stop.prevent="edit(props.item)"
+              slot="activator"
             )
               v-icon edit
             span Editar
           v-tooltip(top)
             v-btn(
-            fab
-            flat
-            dark
-            small
-            color="red"
-            @click.stop.prevent="delete(props.item)"
-            slot="activator"
+              fab
+              flat
+              dark
+              small
+              color="red"
+              @click.stop.prevent="delete(props.item)"
+              slot="activator"
             )
               v-icon delete
             span Excluir
@@ -36,160 +45,76 @@
 </template>
 
 <script>
-
-  import Page from "../../components/Page";
-  import DataTable from "../../components/DataTable";
+  import Page from '@/components/Page';
+  import DataTable from '@/components/DataTable';
+  import Headers from '@/views/Customers/headers';
 
   export default {
     components: {
       DataTable,
-      Page
+      Page,
+      Headers
     },
     data () {
       return {
-        headers: [
-          {text: 'Código', align: 'left', sortable: false, value: 'code', width: '10%'},
-          {text: 'Nome/Razão Social', align: 'left', sortable: false, value: 'name', width: '40%'},
-          {text: 'Cpf/Cnpj', align: 'left', sortable: false, value: 'document', width: '15%'},
-          {text: 'Telefone', align: 'left', sortable: false, value: 'phone', width: '15%'},
-          {text: 'Cidade/Estado', align: 'left', sortable: false, value: 'location', width: '10%'},
-          {text: 'Ações', align: 'left', sortable: false, value: 'action', width: '10%'}
-        ],
-        items: [
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-          {
-            code: 800123,
-            name: 'Cliente 1',
-            document: '11.279.307/0001-59',
-            phone: '(44) 9 9898-9898',
-            location: 'Maringá/PR',
-          },
-        ]
+        headers: Headers,
+        customers: [],
+        totalItems: 0,
+        pagination: {
+          limit: 10,
+          current: 1,
+        },
+      }
+    },
+    computed:{
+      currentPage() {
+        const { pagination } = this;
+        return (pagination.atual - 1) * pagination.quantidade;
+      },
+    },
+    created() {
+      this.getCustomers();
+    },
+    methods: {
+      getCustomers() {
+        const { pagination } = this;
+        const options = {
+          search: this.search,
+          limit: pagination.limit,
+          offset: this.currentPage,
+          is_staff: true,
+        };
+        CustomersService
+          .getCustomers(options)
+          .then(({ data }) => {
+            this.customers = data.results;
+            this.totalItems = data.count;
+            const pages = Math.ceil(parseInt((this.totalItems), 10) / parseInt((pagination.limit), 10));
+            pagination.atual = pages > pagination.atual ? pagination.atual : pages;
+          });
+      },
+      edit(id) {
+        this.$router.push({ name: 'custumers', params: id });
+      },
+      delete(customer) {
+        this.$swal({
+          title: 'Atenção!!!',
+          text: 'Tem certeza que deseja excluir este cliente?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sim',
+          cancelButtonText: 'Cancelar'
+        }).then(() => {
+          CustomersService
+            .deleteCustomers(customer.id)
+            .then(() => {
+              this.getCustomers()
+              miniToastr.success('Cliente excluído com sucesso', 'Sucesso!')
+            })
+            .catch(() => {
+              miniToastr.error('Houve um erro ao excluir o cliente!', 'Erro!')
+            })
+        })
       }
     }
   }
