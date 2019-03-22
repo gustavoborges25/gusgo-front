@@ -1,10 +1,13 @@
 module.exports = {
-  lintOnSave: false,
+  lintOnSave: 'error',
+  assetsDir: './src/assets',
   devServer: {
-    open: process.platform === 'darwin',
-    host: '0.0.0.0',
-    port: 3000, // CHANGE YOUR PORT HERE!
-    https: false,
-    hotOnly: false,
+    quiet: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost',
+      },
+    },
+    port: 3000,
   },
-}
+};
