@@ -5,9 +5,8 @@ module.exports = {
     quiet: true,
     proxy: {
       '/api': {
-        target: 'http://localhost',
+        target: 'http://localhost:8081',
       },
     },
-    port: 3000,
   },
 };

@@ -26,6 +26,7 @@
   import BtnConfirm from '@/support/commons/components/ButtonConfirm.vue';
   import TextFieldEmail from '@/support/commons/components/TextFieldEmail.vue';
   import TextFieldPassword from '@/support/commons/components/TextFieldPassword';
+  import { login } from '@/domain/Login/LoginService';
 
   export default {
     components: {
@@ -42,22 +43,23 @@
       }
     },
     methods: {
-      login () {
-        this
-          .$http
-          .post('api/auth', this.user)
-          .then(({ body }) => {
-            let rollbackUri = localStorage.getItem('rollback-uri')
-            localStorage.setItem('authorization', 'Bearer ' + body.token)
-
-            this
-              .$router
-              .replace(rollbackUri || '/')
-          })
-          .catch(({ body }) => {
-            // this.messageHandlerError(body.errors)
-          })
-      }
+      login() {
+        const rollbackUri = localStorage.getItem('rollback-uri');
+          login(this.user)
+          .then(() => {
+            this.$router.replace(rollbackUri || '/');
+          }, (error) => {
+            const { data } = error.response;
+            if (data.errors) {
+              this.simpleMessageWithTimer(data.errors[0].messages[0]);
+            } else {
+              this.simpleMessageWithTimer(data.message);
+            }
+          });
+      },
+      // toForgotPassword() {
+      //   this.$router.replace({ name: 'forgotPassword' });
+      // },
     }
   }
 </script>

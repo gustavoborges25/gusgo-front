@@ -4,7 +4,6 @@ import '@/support/plugins/notifications';
 import { formataData, parseData } from '@/support/commons/filters/date';
 import { formataCpf } from '@/support/commons/filters/cpf';
 import { formataTelefone } from '@/support/commons/filters/phone';
-import { AuthorizationInterceptor } from '@/support/plugins//interceptors'
 import '@/support/plugins/vue';
 
 Vue.config.productionTip = false;
