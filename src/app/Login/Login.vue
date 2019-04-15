@@ -1,25 +1,34 @@
 <template lang='pug'>
-  v-form.login(@submit="login()" ref="form")
-    v-layout(column wrap align-center justify-center)
-      v-flex.fundo-login(xs12)
-      v-flex.login-position(xs12)
-        img(src="@/assets/logo.png")
-        v-card.elevation-3.white
+  v-layout
+    v-flex(xs6).primary
+      v-layout(
+      align-center
+      justify-center
+      fill-height
+      )
+        img.login--logo(src="@/assets/logo.png")
+    v-flex(xs6)
+      v-layout(
+        align-center
+        justify-center
+        fill-height
+      )
+        v-card.elevation-3.white(min-width="50%")
           v-card-text
             text-field-email(
-              :required="true"
+              required
               v-model="user.email"
             )
             text-field-password(
-              :required="true"
+              required
               v-model="user.password"
             )
-            v-btn.right(
+            v-btn(
               flat
               small
-              to="/forgot-password"
+              to="toForgotPassword()"
             ) Esqueceu sua senha?
-            btn-confirm.mb-3(@click-event="login()")
+            btn-confirm.mb-3(@click="login()")
 </template>
 
 <script>
@@ -44,22 +53,32 @@
     },
     methods: {
       login() {
-        const rollbackUri = localStorage.getItem('rollback-uri');
-          login(this.user)
+        login(this.user)
           .then(() => {
-            this.$router.replace(rollbackUri || '/');
+            this.$router.replace('/');
           }, (error) => {
-            const { data } = error.response;
-            if (data.errors) {
-              this.simpleMessageWithTimer(data.errors[0].messages[0]);
-            } else {
-              this.simpleMessageWithTimer(data.message);
-            }
+            //eslint-disable-next-line
+            console.log(error);
           });
       },
-      // toForgotPassword() {
-      //   this.$router.replace({ name: 'forgotPassword' });
-      // },
+      toForgotPassword() {
+        this.$router.replace({ name: 'forgotPassword' });
+      },
     }
   }
 </script>
+
+<style lang="sass">
+.login
+  &--card
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    width: 40vh
+    margin-top: -45px
+  &--logo
+    img
+      max-width: 550px !important
+</style>
+
