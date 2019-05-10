@@ -1,33 +1,14 @@
-import Vue from 'vue'
-import './plugins/vuetify'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import VueResource from 'vue-resource'
-import Env from '../.env.js'
-import {AuthorizationInterceptor} from './interceptors'
+import Vue from 'vue';
+import '@/support/plugins/vuetify';
+import '@/support/plugins/notifications';
+import { formataData, parseData } from '@/support/commons/filters/date';
+import { formataCpf } from '@/support/commons/filters/cpf';
+import { formataTelefone } from '@/support/commons/filters/phone';
+import '@/support/plugins/vue';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-var theme = require('../.theme.json')
-theme.install = function () {
-  Object.defineProperty(Vue.prototype, '$theme', {
-    get () {
-      return theme
-    }
-  })
-}
-
-Vue.use(VueResource)
-Vue.use(theme)
-Vue.use(Env)
-
-Vue.http.interceptors.push(AuthorizationInterceptor(router))
-Vue.http.options.root = Vue.env.BASE_API_URL
-
-new Vue({
-  router,
-  store,
-  render: h => h(App),
-  components: { App }
-}).$mount('#app')
+Vue.filter('formataData', formataData);
+Vue.filter('parseData', parseData);
+Vue.filter('formataCpf', formataCpf);
+Vue.filter('formataTelefone', formataTelefone);
