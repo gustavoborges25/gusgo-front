@@ -1,6 +1,8 @@
 <template lang='pug'>
   v-app(
     standalone
+    :dark="$theme.dark"
+    :light="!$theme.dark"
   )
     v-fade-transition(mode='out-in')
       router-view
@@ -13,4 +15,5 @@
 </script>
 
 <style lang="stylus">
+  @import 'stylus/app'
 </style>

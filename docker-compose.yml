@@ -7,5 +7,5 @@ services:
       - .:/code
     working_dir: /code
     ports:
-      - 8080:8080
-    command: yarn serve
+      - 3000:3000
+    command: npm run serve
